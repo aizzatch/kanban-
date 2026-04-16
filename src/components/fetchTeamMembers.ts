@@ -1,5 +1,6 @@
 import { supabase } from "../supabase";
-import type { TeamMember } from "./teamMemberUtils";
+
+type TeamMember = { id: string; user_id: string; name: string; avatar?: string | null; [key: string]: unknown };
 
 export const fetchTeamMembers = async (
   userId: string,

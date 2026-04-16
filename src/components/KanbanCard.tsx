@@ -4,7 +4,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Task } from "./FetchTasks";
 import pencilIcon from "../assets/pencil.svg";
-import circleXIcon from "../assets/circle-x.svg";
 import DateTimePicker from "./DateTimePicker";
 import { initials, decodeMember } from "./teamMemberUtils";
 
