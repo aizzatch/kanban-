@@ -1,0 +1,176 @@
+/* LandingPage.css */
+
+.saas-landing {
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #F7F7F8;
+  color: #1a2332;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header */
+.saas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .saas-header {
+    padding: 20px 24px;
+  }
+}
+
+.saas-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #111827;
+  text-decoration: none;
+}
+
+.saas-nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .saas-nav {
+    display: none; /* Hide standard nav on mobile for simplicity */
+  }
+}
+
+.saas-nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+.saas-nav-link:hover {
+  color: #0f172a;
+}
+
+.saas-nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #0f172a;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s ease;
+}
+
+.saas-nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Hero Section */
+.saas-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .saas-hero {
+    padding: 80px 24px 60px;
+  }
+}
+
+.saas-hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+  margin: 0 0 24px 0;
+}
+
+@media (max-width: 768px) {
+  .saas-hero h1 {
+    font-size: 2.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .saas-hero h1 {
+    font-size: 2.25rem;
+  }
+}
+
+.saas-hero p {
+  font-size: 1.25rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 40px 0;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .saas-hero p {
+    font-size: 1.125rem;
+    margin: 0 0 32px 0;
+  }
+}
+
+.saas-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+}
+
+.saas-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.15), 0 2px 4px -1px rgba(15, 23, 42, 0.1);
+}
+
+.saas-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Feature Section */
+.saas-feature {
+  padding: 0 24px 120px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .saas-feature {
+    padding: 0 24px 60px;
+  }
+}

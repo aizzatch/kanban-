@@ -1,0 +1,171 @@
+/* MagicBento.css */
+
+.bento-section {
+  position: relative;
+  user-select: none;
+  width: 100%;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.magic-bento-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 240px;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 300px;
+  /* Color defaults but usually overwritten by inline styles */
+  --glow-color-rgb: 120, 120, 120;
+}
+
+.magic-bento-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  transform: translateY(-2px);
+}
+
+.magic-bento-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.magic-bento-card__label {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 24px;
+  background: #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.3s ease;
+}
+
+.magic-bento-card:hover .magic-bento-card__label {
+  background: #e2e8f0;
+}
+
+.magic-bento-card__content {
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.magic-bento-card__title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.magic-bento-card__description {
+  font-size: 0.9375rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.magic-bento-card--text-autohide .magic-bento-card__title,
+.magic-bento-card--text-autohide .magic-bento-card__description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.magic-bento-card--text-autohide .magic-bento-card__title {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+.magic-bento-card--text-autohide .magic-bento-card__description {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+
+@media (max-width: 599px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .magic-bento-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .magic-bento-card:nth-child(2) { grid-column: span 2; }
+  .magic-bento-card:nth-child(3) { grid-column: span 1; }
+  .magic-bento-card:nth-child(4) { grid-column: span 1; }
+  .magic-bento-card:nth-child(5) { grid-column: span 2; }  
+}
+
+/* Clean, subtle border glow */
+.magic-bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.9)) 0%,
+    rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.25)) 40%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+}
+
+.magic-bento-card:hover::after {
+  opacity: 1;
+}
+
+/* Global spotlight styles */
+.global-spotlight {
+  /* mix-blend-mode: multiply; for subtle shading or screen if we wanted vibrant light */
+  mix-blend-mode: normal; /* Normal looks cleaner for soft gray glows on white backgrounds */
+  pointer-events: none;
+  z-index: 1; 
+  /* Push behind text but over background? No, set to global overlay with no events */
+}
+
+/* Particle effect */
+.particle-container {
+  overflow: hidden;
+}
