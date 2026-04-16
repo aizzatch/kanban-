@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Task } from "./FetchTasks";
@@ -147,54 +148,80 @@ export default function KanbanCard({ task, onClick, onPriorityChange, onDueDateC
       </div>
 
       {/* Delete confirmation dialog */}
-      {confirmDelete && (
-        <>
+      {confirmDelete && typeof document !== "undefined" && createPortal(
+        <div
+          onClick={() => setConfirmDelete(false)}
+          onPointerDown={(e) => e.stopPropagation()}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.4)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+          }}
+        >
           <div
-            style={{ position: "fixed", inset: 0, zIndex: 199 }}
-            onPointerDown={(e) => e.stopPropagation()}
-            onClick={() => setConfirmDelete(false)}
-          />
-          <div
-            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             style={{
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
               background: "#fff",
-              border: "1px solid #e2e8f0",
-              borderRadius: "10px",
+              borderRadius: "16px",
               padding: "24px",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
-              zIndex: 200,
               width: "320px",
               maxWidth: "90vw",
+              boxShadow: "0 10px 40px -10px rgba(0,0,0,0.2)",
               display: "flex",
               flexDirection: "column",
               gap: "16px",
             }}
           >
-            <p style={{ margin: 0, fontSize: "0.85rem", color: "#0f172a", fontWeight: 500 }}>
-              Are You Sure You Want to Delete This Task?
+            <h3 style={{ margin: 0, fontSize: "0.95rem", fontWeight: 600, color: "#1a2332" }}>
+              Delete Task
+            </h3>
+
+            <p style={{ margin: 0, fontSize: "0.85rem", color: "#64748b" }}>
+              Are you sure you want to delete this task? This action cannot be undone.
             </p>
+
             <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
               <button
                 onClick={() => setConfirmDelete(false)}
-                style={{ padding: "8px 16px", border: "1px solid #e2e8f0", borderRadius: "6px", background: "#fff", cursor: "pointer", fontSize: "0.875rem" }}
+                style={{
+                  padding: "8px 16px",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "6px",
+                  background: "#fff",
+                  cursor: "pointer",
+                  fontSize: "0.8125rem",
+                }}
               >
                 Cancel
               </button>
+
               <button
-                onClick={() => { setConfirmDelete(false); onDelete(task.id); }}
-                style={{ padding: "8px 16px", border: "none", borderRadius: "6px", background: "#ef4444", color: "#fff", cursor: "pointer", fontSize: "0.875rem", fontWeight: 500 }}
+                onClick={() => {
+                  setConfirmDelete(false);
+                  onDelete(task.id);
+                }}
+                style={{
+                  padding: "8px 16px",
+                  border: "none",
+                  borderRadius: "6px",
+                  background: "#ef4444",
+                  color: "#fff",
+                  cursor: "pointer",
+                  fontSize: "0.8125rem",
+                  fontWeight: 500,
+                }}
               >
                 Delete
               </button>
             </div>
           </div>
-        </>
+        </div>,
+        document.body
       )}
-
 
       {/* Team member avatars */}
       {task.team_members && task.team_members.length > 0 && (() => {
@@ -293,13 +320,13 @@ export default function KanbanCard({ task, onClick, onPriorityChange, onDueDateC
             )}
           </button>
 
-          {showDatePicker && (
-            <>
+          {showDatePicker && typeof document !== "undefined" && createPortal(
+            <div onPointerDown={(e) => e.stopPropagation()}>
               <div
-                style={{ position: "fixed", inset: 0, zIndex: 99 }}
+                style={{ position: "fixed", inset: 0, zIndex: 9998 }}
                 onClick={() => setShowDatePicker(false)}
               />
-              <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: "#fff", border: "1px solid #e2e8f0", borderRadius: "8px", padding: "16px", boxShadow: "0 8px 24px rgba(0,0,0,0.15)", zIndex: 100, width: "220px", maxWidth: "90vw", boxSizing: "border-box" }}>
+              <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: "#fff", border: "1px solid #e2e8f0", borderRadius: "8px", padding: "16px", boxShadow: "0 8px 24px rgba(0,0,0,0.15)", zIndex: 9999, width: "220px", maxWidth: "90vw", boxSizing: "border-box" }}>
                 <DateTimePicker
                   value={pendingDate}
                   onChange={setPendingDate}
@@ -319,7 +346,8 @@ export default function KanbanCard({ task, onClick, onPriorityChange, onDueDateC
                   </button>
                 </div>
               </div>
-            </>
+            </div>,
+            document.body
           )}
         </div>
       </div>

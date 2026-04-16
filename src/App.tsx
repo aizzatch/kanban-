@@ -118,8 +118,8 @@ export default function App() {
 
         {/* Header & Controls Wrapper Centered */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "32px", width: "100%" }}>
-          <h1 style={{ margin: "0 0 24px", color: "#0f172a", fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.2, textAlign: "center" }}>
-            Kanban Board
+          <h1 style={{ margin: "0 0 24px", color: "#0f172a", fontSize: "4rem", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.2, textAlign: "center", fontFamily: "'Merriweather', serif" }}>
+            EUNOMIA
           </h1>
 
           {/* Summary strip (Back above the Toolbar) */}
